@@ -15,17 +15,121 @@
 
 <script>
 	// Complete this section and create a CSS file named style.css
-
-	var video = document.getElementById("video");
-	var caption = document.getElementById("captions");
+	var video = document.getElementById("a_classic");
+	var caption = document.getElementById("lyrics");
 	var timer = document.getElementById("timer");
+
 	video.addEventListener("timeupdate", function() {
-		timer.innerHTML = video.currentTime;
 
-
-	})
-
-
+		if (video.currentTime < 9) {
+			caption.innerHTML = "<h2>Hush Hush Hush Here Comes The Bogey Man</h2>";
+		} 
+		else if (video.currentTime > 9 && video.currentTime < 13.5) {
+			caption.innerHTML = "<h2>Children have You ever met the Bogeyman before</h2>";
+		} 
+		else if (video.currentTime > 13.5 && video.currentTime < 17) {
+			caption.innerHTML = "<h2>No, of course You haven't for You're much too good, I'm sure;</h2>";
+		}
+		else if (video.currentTime > 17 && video.currentTime < 21) {
+			caption.innerHTML = "<h2>Don't You be afraid of him if he should visit You,</h2>";
+		}
+		else if (video.currentTime > 21 && video.currentTime < 25) {
+			caption.innerHTML = "<h2>He's a great big coward, so I'll tell You what to do</h2>";
+		}
+		else if (video.currentTime > 25 && video.currentTime < 29) {
+			caption.innerHTML = "<h2>Hush, hush, hush, here comes the Bogeyman,</h2>";
+		}
+		else if (video.currentTime > 29 && video.currentTime < 33) {
+			caption.innerHTML = "<h2>Don't let him come too close to You, he'll catch you if he can.</h2>";
+		}
+		else if (video.currentTime > 33 && video.currentTime < 37) {
+			caption.innerHTML = "<h2>Just pretend that you're a crocodile</h2>";
+		}
+		else if (video.currentTime > 37 && video.currentTime < 41) {
+			caption.innerHTML = "<h2>And you will find that Bogeyman will run away a mile.</h2>";
+		}
+		else if (video.currentTime > 41 && video.currentTime < 44) {
+			caption.innerHTML = "<h2>Say Shoo shoo and stick him with a pin</h2>";
+		}
+		else if (video.currentTime > 44 && video.currentTime < 49) {
+			caption.innerHTML = "<h2>Bogeyman will very nearly jump out of his skin</h2>";
+		}
+		else if (video.currentTime > 49 && video.currentTime < 53) {
+			caption.innerHTML = "<h2>Say buzz buzz just like the wasps that sting</h2>";
+		}
+		else if (video.currentTime > 53 && video.currentTime < 57) {
+			caption.innerHTML = "<h2>Bogeyman will think you are an elephant with wings</h2>";
+		}
+		else if (video.currentTime > 57 && video.currentTime < 61) {
+			caption.innerHTML = "<h2>Hush, hush, hush, here comes the Bogeyman</h2>";
+		} 
+		else if (video.currentTime > 61 && video.currentTime < 68) {
+			caption.innerHTML = "<h2>Tell him you've got soldiers in your bed</h2>";
+		}
+		else if (video.currentTime > 68 && video.currentTime < 72) {
+			caption.innerHTML = "<h2>For he will never guess that they are only made of lead</h2>";
+		}
+		else if (video.currentTime > 80 && video.currentTime < 83) {
+			caption.innerHTML = "<h2>Say Hush hush, he'll think that you're asleep</h2>";
+		}
+		else if (video.currentTime > 83 && video.currentTime < 88) {
+			caption.innerHTML = "<h2>If you make a lovely snore away he'll softly creep</h2>";
+		}
+		else if (video.currentTime > 88 && video.currentTime < 92) {
+			caption.innerHTML = "<h2>Sing this tune you children one and all</h2>";
+		}
+		else if (video.currentTime > 92 && video.currentTime < 95) {
+			caption.innerHTML = "<h2>Bogeyman will run away, he'll think it's Henry Hall!</h2>";
+		}
+		else if (video.currentTime > 95 && video.currentTime < 100) {
+			caption.innerHTML = "<h2>When the shadows of the evening creep across the sky</h2>";
+		}
+		else if (video.currentTime > 100 && video.currentTime < 104) {
+			caption.innerHTML = "<h2>And your Mummy comes upstairs to sing a lullaby</h2>";
+		}
+		else if (video.currentTime > 104 && video.currentTime < 107) {
+			caption.innerHTML = "<h2>Tell her that the bogeyman no longer frightens you</h2>";
+		}
+		else if (video.currentTime > 107 && video.currentTime < 111) {
+			caption.innerHTML = "<h2>Uncle Henry's very kindly told you what to do</h2>";
+		}
+		else if (video.currentTime > 111 && video.currentTime < 115) {
+			caption.innerHTML = "<h2>Hush, hush, hush, here comes the Bogeyman</h2>";
+		} 
+		else if (video.currentTime > 115 && video.currentTime < 119) {
+			caption.innerHTML = "<h2>Don't let him come too close to you, He'll catch you if he can.</h2>";
+		}
+		else if (video.currentTime > 119 && video.currentTime < 122) {
+			caption.innerHTML = "<h2>Just pretend your teddy bear's a dog</h2>";
+		}
+		else if (video.currentTime > 122 && video.currentTime < 126) {
+			caption.innerHTML = "<h2>Then shout out, 'Fetch him, Teddy!' and he'll hop off like a frog.</h2>";
+		}
+		else if (video.currentTime > 134 && video.currentTime < 139) {
+			caption.innerHTML = "<h2>Say Meoow, pretend that you're a cat</h2>";
+		}
+		else if (video.currentTime > 139 && video.currentTime < 143) {
+			caption.innerHTML = "<h2>He'll think you may scratch him that make him fall down flat</h2>";
+		}
+		else if (video.currentTime > 143 && video.currentTime < 147) {
+			caption.innerHTML = "<h2>Just pretend he isn't really there</h2>";
+		}
+		else if (video.currentTime > 147 && video.currentTime < 152) {
+			caption.innerHTML = "<h2>You will find that Bogey man will vanish in thin air</h2>";
+		}
+		else if (video.currentTime > 158 && video.currentTime < 161) {
+			caption.innerHTML = "<h2>Here's one way to catch him without fail</h2>";
+		}
+		else if (video.currentTime > 161 && video.currentTime < 163) {
+			caption.innerHTML = "<h2>Just keep a little salt with you</h2>";
+		}
+		else if (video.currentTime > 163 && video.currentTime < 168) {
+			caption.innerHTML = "<h2>and put it on his tail</h2>";
+		}
+		else {
+			caption.innerHTML = "";
+		}
+		}, false); 
 
 </script>
 </body>
