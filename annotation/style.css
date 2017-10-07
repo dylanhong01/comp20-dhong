@@ -1,0 +1,27 @@
+body {
+	font-family: "Open Sans",Arial,sans-serif;
+	background-color: white;
+}
+
+h1 {
+	text-align: left;
+	font-size: 58px;
+	margin-left: 10%;
+	margin-right: 20%;
+}
+
+
+.label {
+	font-size: 32px;
+	color: black;
+}
+
+.info {
+	font-size: 16px;
+	color: black;
+}
+
+.jobname {
+	font-size: 24px;
+	color: white;
+}
