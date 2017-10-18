@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<title>Assignment 2</title>
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
+		<link rel="stylesheet" href="style.css" />
+		
+		<script>
+			console.log("begining script");
+			var myLat = 0;
+			var myLng = 0;
+			var request = new XMLHttpRequest();
+			var me = new google.maps.LatLng(myLat, myLng);
+			var myOptions = {
+						zoom: 13, // The larger the zoom number, the bigger the zoom
+						center: me,
+						mapTypeId: google.maps.MapTypeId.ROADMAP
+					};
+			var map;
+			var marker;
+			var infowindow = new google.maps.InfoWindow();
+
+
+
+			
+			function init()
+			{
+				console.log("called init");
+				map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+				console.log("get location");
+				getMyLocation();
+				console.log("fin get loc");
+			}
+			
+			function getMyLocation() {
+				if (navigator.geolocation) { // the navigator.geolocation object is supported on your browser
+					console.log("nav.geo");
+					navigator.geolocation.getCurrentPosition(function(position) {
+						console.log("get current pos");
+						myLat = position.coords.latitude;
+						myLng = position.coords.longitude;
+						console.log(myLat + " " + myLng);
+						renderMap();
+					});
+				}
+				else {
+					alert("Geolocation is not supported by your web browser.  What a shame!");
+					console.log("alert");
+				}
+			}
+
+
+
+
+			function renderMap()
+			{
+				me = new google.maps.LatLng(myLat, myLng);
+				
+				// Update map and go there...
+				map.panTo(me);
+	
+				// Create a marker
+				marker = new google.maps.Marker({
+					position: me,
+					title: "Here I Am!",
+					icon: 'me.png'
+				});
+				marker.setMap(map);
+					
+				// Open info window on click of marker
+				google.maps.event.addListener(marker, 'click', function() {
+					infowindow.setContent(marker.title);
+					infowindow.open(map, marker);
+				});
+			}
+		</script>
+	</head>
+	
+	<body onload="init()">
+		<div id="map_canvas"></div>
+	</body>
+</html>
