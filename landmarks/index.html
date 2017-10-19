@@ -9,13 +9,11 @@
 		<link rel="stylesheet" href="style.css" />
 		
 		<script>
-			console.log("begining script");
 			var myLat = 0;
 			var myLng = 0;
-			//var request = new XMLHttpRequest();
 			var me = new google.maps.LatLng(myLat, myLng);
 			var myOptions = {
-						zoom: 13, // The larger the zoom number, the bigger the zoom
+						zoom: 13, 
 						center: me,
 						mapTypeId: google.maps.MapTypeId.ROADMAP
 					};
@@ -29,29 +27,22 @@
 			
 			function init()
 			{
-				console.log("called init");
 				map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
-				console.log("get location");
 				getMyLocation();
-				console.log("fin get loc");
 				
 			}
 			
 			function getMyLocation() {
-				if (navigator.geolocation) { // the navigator.geolocation object is supported on your browser
-					console.log("nav.geo");
+				if (navigator.geolocation) { 
 					navigator.geolocation.getCurrentPosition(function(position) {
-						console.log("get current pos");
 						myLat = position.coords.latitude;
 						myLng = position.coords.longitude;
-						console.log(myLat + " " + myLng);
 						serverCom();
 						
 					});
 				}
 				else {
 					alert("Geolocation is not supported by your web browser.  What a shame!");
-					console.log("alert");
 				}
 			}
 
@@ -78,7 +69,6 @@
 				}
 
 				var R = 3958.756; // Miles
-				//has a problem with the .toRad() method below.
 				var x1 = lat2-lat1;
 				var dLat = x1.toRad();  
 				var x2 = lon2-lon1;
@@ -96,7 +86,6 @@
 			
 			function peopleMarker(inLat, inLng, login) {
 
-				//console.log("making people marker");
 				var inLatLng = new google.maps.LatLng(inLat, inLng);
 				var dFromMe = calcDistance(inLat, inLng, myLat, myLng);
 				var peopleMarker = new google.maps.Marker({
@@ -117,9 +106,7 @@
 
 			function landMarker(inLat, inLng, details) {
 
-				//console.log("making land");
 				var inLatLng = new google.maps.LatLng(inLat, inLng);
-				//var dFromMe = calcDistance(inLat, inLng, myLat, myLng);
 				var landMarker = new google.maps.Marker({
 				    position: inLatLng,
 				    icon: 'landmark.png',
@@ -138,41 +125,31 @@
 
 
 			function serverCom() {
-			// Step 1: make an instance of XMLHttpRequest object
 			var request = new XMLHttpRequest();
 			var url = "https://defense-in-derpth.herokuapp.com/sendLocation";
 			var params = "login=hzLFqTnR&lat="+myLat+"&lng="+myLng;
-			console.log(myLat + " " + myLng);
 
-			// Step 2: set up request
 			request.open("POST", url, true);
 			request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
 			
-
-			// Step 3: set up handler function to deal with response
 			request.onreadystatechange = function() {
 				if (request.readyState == 4 && request.status == 200) {
-					console.log("ready state");
-					// Step 5: do something with the response data...
-					// JSON.parse() does the parsing
-					elements = JSON.parse(request.responseText);
-					console.log(elements);
 
-					//console.log(elements.landmarks);
+					elements = JSON.parse(request.responseText);
+
 					newData = "";
 
 
 
 					lmMilesAway = calcDistance(elements.landmarks[0].geometry.coordinates[1], elements.landmarks[0].geometry.coordinates[0], myLat, myLng);
-					console.log("miles away" + lmMilesAway);
 					nearest = elements.landmarks[0].properties.Location_Name;
 
 					drawLine(elements.landmarks[0].geometry.coordinates[1], elements.landmarks[0].geometry.coordinates[0]);
 
 					for (i in elements.people){
 
-					   //console.log("people" + elements.people[i].lat + " " + elements.people[i].lng);
+	
 					   peopleMarker(elements.people[i].lat,elements.people[i].lng, elements.people[i].login);
 
 					}
@@ -182,7 +159,6 @@
 
 						if (calcDistance(elements.landmarks[i].geometry.coordinates[1], elements.landmarks[i].geometry.coordinates[0], myLat, myLng) <= 1) {
 
-							//console.log(elements.landmarks[i].geometry);
 							landMarker(elements.landmarks[i].geometry.coordinates[1],elements.landmarks[i].geometry.coordinates[0], elements.landmarks[i].properties.Details);
 
 						}
@@ -192,8 +168,6 @@
 				renderMap();
 			};
 
-
-			// Step 4: actually send the request
 			request.send(params);
 		}
 
@@ -201,11 +175,9 @@
 			{
 				me = new google.maps.LatLng(myLat, myLng);
 				
-				// Update map and go there...
+		
 				map.panTo(me);
 	
-				// Create a marker\
-				console.log("render me");
 				marker = new google.maps.Marker({
 					position: me,
 					title: "Login: hzLFqTnR " + "<br/>Nearest Landmark: " + nearest + "<br/>Miles away: " + lmMilesAway,
@@ -213,7 +185,6 @@
 				});
 				marker.setMap(map);
 					
-				// Open info window on click of marker
 				google.maps.event.addListener(marker, 'click', function() {
 					infowindow.setContent(marker.title);
 					infowindow.open(map, marker);
