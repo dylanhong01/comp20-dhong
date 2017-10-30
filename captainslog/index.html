@@ -8,7 +8,71 @@
     <link rel="stylesheet" href="style.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script>
-        // Your work will be done here...
+        
+
+    $( document ).ready(function() {
+ 
+        $(document).keypress(function(e){
+            if(e.which == 13) {
+                console.log ("Key Enter");
+                console.log(currDate(new Date()));
+                store();
+            }
+        }); 
+ 
+    });
+
+
+    function reload() {
+        elem = document.getElementById("log");
+        output = "";
+        for (key in localStorage) {
+            output = output + "<p>" + localStorage[key] + "</p>\n";
+        }
+        elem.innerHTML = output;
+    }    
+
+    function store(){
+        txt = currDate(curr = new Date()) + document.getElementById("msg").value;
+
+        localStorage[curr.getTime()] = txt;
+
+        reload();
+
+    }
+
+   
+    function currDate(date) {
+        var monthNames = [
+        "January", "February", "March",
+        "April", "May", "June", "July",
+        "August", "September", "October",
+        "November", "December"
+        ];
+
+
+
+        var weekday = new Array(7);
+        weekday[0] =  "Sunday";
+        weekday[1] = "Monday";
+        weekday[2] = "Tuesday";
+        weekday[3] = "Wednesday";
+        weekday[4] = "Thursday";
+        weekday[5] = "Friday";
+        weekday[6] = "Saturday";
+
+    var dayOfWeek = weekday[date.getDay()];
+    var day = date.getDate();
+    var monthIndex = date.getMonth();
+    var year = date.getFullYear();
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var seconds = date.getSeconds(); 
+
+    return dayOfWeek + ' ' + day + ' ' + monthNames[monthIndex] + ' ' + hours +':'+ minutes+ ':' + seconds + ' '+ year + ' - ';
+    }
+
+    
     </script>
 </head>
 
