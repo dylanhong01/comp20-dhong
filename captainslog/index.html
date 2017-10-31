@@ -11,11 +11,12 @@
         
 
     $( document ).ready(function() {
- 
+
+
+    localStorage.setItem('log', 'Initializing');
+
         $(document).keypress(function(e){
             if(e.which == 13) {
-                console.log ("Key Enter");
-                console.log(currDate(new Date()));
                 store();
             }
         }); 
@@ -25,23 +26,26 @@
 
     function reload() {
         elem = document.getElementById("log");
-        output = "";
-        for (key in localStorage) {
-            output = output + "<p>" + localStorage[key] + "</p>\n";
-        }
+        output = "";        
+        output = localStorage[log];
+
         elem.innerHTML = output;
+
     }    
 
     function store(){
-        txt = currDate(curr = new Date()) + document.getElementById("msg").value;
+        txt = currDate(curr = new Date()) + document.getElementById("msg").value + "</p>\n";
 
-        localStorage[curr.getTime()] = txt;
+        if (localStorage[log] == undefined){
+            localStorage[log] = txt;
+        } else {
+            localStorage[log] = txt + localStorage[log];
+        }
 
         reload();
 
     }
 
-   
     function currDate(date) {
         var monthNames = [
         "January", "February", "March",
@@ -49,8 +53,6 @@
         "August", "September", "October",
         "November", "December"
         ];
-
-
 
         var weekday = new Array(7);
         weekday[0] =  "Sunday";
