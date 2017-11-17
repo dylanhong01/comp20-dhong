@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+i<!DOCTYPE html>
 
 <html>
 
@@ -64,6 +64,13 @@
 
 			function calcDistance(lat2,lon2,lat1,lon1){
 
+				lat2 = parseFloat(lat2);
+				lon2 = parseFloat(lon2);
+				lat1 = parseFloat(lat1);
+				lon1 = parseFloat(lon1);
+
+
+
 				Number.prototype.toRad = function() {
    					return this * Math.PI / 180;
 				}
@@ -126,7 +133,7 @@
 
 			function serverCom() {
 			var request = new XMLHttpRequest();
-			var url = "https://defense-in-derpth.herokuapp.com/sendLocation";
+			var url = "https://floating-waters-63985.herokuapp.com/sendLocation";
 			var params = "login=hzLFqTnR&lat="+myLat+"&lng="+myLng;
 
 			request.open("POST", url, true);
