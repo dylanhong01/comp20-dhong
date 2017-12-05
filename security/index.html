@@ -16,13 +16,44 @@
 <h1>Dylan Hong's Assignment 4</h1> <!-- Styling is frowned upon -->
 
 <p>This is the documentation for my security assessment</p>
-<p>1. Introduction: </p>
-<p>2. Methodology: </p>
-<p>3. Abstract of Findings: </p>
-<p>4. Issues Found: </p>
-<p>5. Conclusion: </p>
-<p>6. References: </p>
+<p>1. Introduction: The product I am working on stores login information including a login, a latitude, and a longitude. Then a user can retrieve the information by going to a URL with /checkins.json at the end. Adding a login in the end of it should return that users logins from the database. I've been hired to find security vulnerabilities in this product. </p>
+<p>2. Methodology: I tested for vulnerabilities by using curl to send data to the server. This allowed me to do things like XXS. It also allowed me to run a loop that fills up the server's databse. I also used the safari web browser to view the server data and also conduct a mongodb injection attacks.</p>
+<p>3. Abstract of Findings: The three vulnerabilities I found could allow people to run dangerous code through your website which allows them to redirect users to any other website. This is done through a method called cross-site scripting. <br> <br> Another vulnerability allows for people to view all of the information on your database. Including information that they should not have access to. This is done by doing something called a mongo injection attack. <br><br> The last vulnerability that I found is that your database does not have any protection againt spamming. Because of this, somebody could run a program on their computer that would fill your database up which will affect your storage and usage of the database information  </p>
+<p>4. Issues Found: <br>
+
+1. Cross-Site Scripting <br>
+Found: When you send javascript to the server, you can redirect people to any website when they try to access the url that displays the database info<br>
+Severity: High. This could allow anybody to take complete control over where your website leads people to.<br>
+Description: I found this by using a curl command that had javascript in it. <br><img src="XSS3.png" alt = "script input" /> <br>The javascript redirects a anybody trying to view the website to youtube.com/c/dylanhongtech. <br><br>
+Proof: Before XXS <img src="origin.png" alt = "Before XXS" /><br>
+After XSS <br><img src="XXS1.png" alt = "After XSS" /> <br> <br>
+Resolution: Make sure you write functions or use functions that strip the user input of any special characters.<br> <br>
+
+2. MongoDB Injection Attack <br>
+Found: When typing in the URL for the checkins list, you should be able to find all of the database entries pertaining to a certain user. However, when you use mongo injection, you can see the entire database.<br>
+Severity: Medium. If your database were filled with more sensitive information , I would give this a high, but you don't have legitamate user information in the database.<br>
+Description: I found this by entering an addition to the login part of a query string<br>  <img src="url.png" alt = "The URL I use " /><br>
+Proof: Output of the entire database when user is different<br><img src="mongo.png" alt = "Mongo Injection" /><br>
+Resolution: Here you would also want to parse the query string for any extraneous input. This would not allow it to access the MonogoDB commands that allow this to happen<br><br>
+
+3. Curl Spamming<br>
+Found: This is found through sending data into the mongodb. <br>
+Severity: Low. This might not be an issue until your database becomes full. Additionally, I think you would just be charged money. I stopped my spam because I was afraid of having the developer get charged for exceeding the storage limits. But if you have a cap, this would stop your database from being able to store any more information which could stop the programs from functioning properly.<br>
+Description: I run a command that inserts large chunks of text into the mongodb with an infinite loop. <br>
+
+<img src="loop.png" alt = "Infinite loop curl script" /> <br>
+
+Running this loop added around 1mb to the database every 15 seconds. This could fill up somebody's server if left up for a long time. Free Mongodb accounts get 512mb of storage, so I can fill this up within 2 hours and 8 minutes. 
+<br>
+Proof: Size of the mongoDB after running the script for about 20 minutes<br>
+<img src="mongofill.png" alt = "Shows a quickly filling mongodb" />
+Resolution: You would want to think about disallowing a user from sending their location to every 30 seconds or so. Seeing as this is location data, there is no need for second by second updates. Also, you sould cap the lengths of the login field.<br><br>
+
+</p>
+<p>5. Conclusion: I would consider getting your programmers to write/use functions that strip the MongoDB login inputs of their special characters. Additionally, you'll need to make sure you provide a propper authentification service so mongo injection attacks wouldn't work. Lastly, I would recommend implementing a timer that doesn't allow a user to input information multiple times within a minute to assist in stopping spam. </p>
+<p>6. References: http://www.mactricksandtips.com/2012/02/loop-repeat-terminal-commands.html <br> https://excess-xss.com <br> https://pastebin.com/ykma84re <br> Ming's Comp 20 Lectures <br></p>
 
 </body>
  
 </html>
+
