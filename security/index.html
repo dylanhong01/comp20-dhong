@@ -25,7 +25,7 @@
 Found: When you send javascript to the server, you can redirect people to any website when they try to access the url that displays the database info<br>
 Severity: High. This could allow anybody to take complete control over where your website leads people to.<br>
 Description: I found this by using a curl command that had javascript in it. <br><img src="XSS3.png" alt = "script input" /> <br>The javascript redirects a anybody trying to view the website to youtube.com/c/dylanhongtech. <br><br>
-Proof: Before XXS <img src="origin.png" alt = "Before XXS" /><br>
+Proof: Before XXS <br><img src="origin.png" alt = "Before XXS" /><br>
 After XSS <br><img src="XXS1.png" alt = "After XSS" /> <br> <br>
 Resolution: Make sure you write functions or use functions that strip the user input of any special characters.<br> <br>
 
@@ -46,7 +46,7 @@ Description: I run a command that inserts large chunks of text into the mongodb 
 Running this loop added around 1mb to the database every 15 seconds. This could fill up somebody's server if left up for a long time. Free Mongodb accounts get 512mb of storage, so I can fill this up within 2 hours and 8 minutes. 
 <br>
 Proof: Size of the mongoDB after running the script for about 20 minutes<br>
-<img src="mongofill.png" alt = "Shows a quickly filling mongodb" />
+<img src="mongofill.png" alt = "Shows a quickly filling mongodb" /> <br>
 Resolution: You would want to think about disallowing a user from sending their location to every 30 seconds or so. Seeing as this is location data, there is no need for second by second updates. Also, you sould cap the lengths of the login field.<br><br>
 
 </p>
